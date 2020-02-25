@@ -5,7 +5,7 @@ using UnityEngine;
 // The three dimensional grid that cubes are stored in
 public class GameGrid : MonoBehaviour
 {
-	GameObject[,,] cubes = new GameObject[5, 5, 25];
+	public Block[,,] blocks = new Block[7, 7, 15];
 	
     // Start is called before the first frame update
     void Start()

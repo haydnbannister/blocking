@@ -17,12 +17,9 @@ public class Block : MonoBehaviour
     {
         
     }
-
-    public bool CanMove(Vector3 movement)
+    
+    private void OnTriggerEnter(Collider other)
     {
-        print("movecheck");
-
-        return false;
         
     }
 }

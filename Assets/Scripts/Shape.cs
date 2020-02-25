@@ -41,7 +41,7 @@ public class Shape : MonoBehaviour
             transform.Translate(Vector3.right * 1);
         }
             
-        // slowly move down
+        // slowly move down over time
         transform.Translate(Vector3.down * Time.deltaTime);
     }
     

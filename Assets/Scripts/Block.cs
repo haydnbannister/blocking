@@ -20,6 +20,7 @@ public class Block : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        
+        print("shape " + gameObject.name + " has collided with " + other.gameObject.name);
+        GetComponentInParent<Shape>().inPlay = false;
     }
 }

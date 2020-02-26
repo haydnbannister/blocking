@@ -76,5 +76,7 @@ public class Shape : MonoBehaviour
         inPlay = false;
 
         _gameGrid.AddBlocks(blocks);
+
+        GameObject.FindWithTag("ShapeSpawner").GetComponent<ShapeSpawner>().SpawnShape();
     }
 }

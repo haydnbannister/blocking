@@ -33,7 +33,7 @@ public class Block : MonoBehaviour
         
         if (other.transform.parent.name == "GameGrid")
         {
-            GetComponentInParent<Shape>().inPlay = false;
+            GetComponentInParent<Shape>().Land();
             return;
         }
         
@@ -45,6 +45,6 @@ public class Block : MonoBehaviour
             return;
         }
         
-        GetComponentInParent<Shape>().inPlay = false;
+        GetComponentInParent<Shape>().Land();
     }
 }

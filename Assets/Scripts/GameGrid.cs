@@ -18,4 +18,18 @@ public class GameGrid : MonoBehaviour
     {
 
     }
+
+	// add a shape to the grid when it lands
+    public void AddBlocks(Block[] newBlocks)
+    {
+	    foreach (var block in newBlocks)
+	    {
+		    var pos = block.transform.position;
+		    var x = (int) pos.x;
+		    var z = (int) pos.z;
+		    var y = (int) pos.y;
+		    blocks[x, z, y] = block;
+	    }
+    }
+    
 }

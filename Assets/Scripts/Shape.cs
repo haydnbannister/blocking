@@ -7,7 +7,8 @@ using UnityEngine.UIElements.Experimental;
 
 public class Shape : MonoBehaviour
 {
-    
+    private GameGrid _gameGrid;
+
     public Block[] blocks;
 
     public bool inPlay = true;
@@ -16,7 +17,7 @@ public class Shape : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _gameGrid = GameObject.FindWithTag("GameGrid").GetComponent<GameGrid>();
     }
 
     // Update is called once per frame
@@ -50,9 +51,22 @@ public class Shape : MonoBehaviour
         return blocks.Select(block => 
             transform.localPosition + block.transform.localPosition + movement)
             .All(newPosition => 
-                !(newPosition.z >= 4) 
-                && !(newPosition.z <= -4) 
-                && !(newPosition.x >= 4) 
-                && !(newPosition.x <= -4));
+                newPosition.z <= 7
+                && newPosition.z >= 0
+                && newPosition.x >= 0
+                && newPosition.x <= 7);
     }
+
+
+    public void Land()
+    {
+        if (!inPlay)
+            return;
+        
+        inPlay = false;
+
+        _gameGrid.AddBlocks(blocks);
+    }
+    
+    
 }

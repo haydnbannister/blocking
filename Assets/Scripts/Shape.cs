@@ -44,9 +44,46 @@ public class Shape : MonoBehaviour
         {
             transform.Translate(Vector3.right * 1);
         }
+        
+        
+        
+        
+        if (Input.GetKeyDown("w"))
+        {
+            foreach (var block in blocks)
+            {
+                block.transform.RotateAround(transform.position, new Vector3(1, 0, 0), 90f);
+            }
+        }
+
+        if (Input.GetKeyDown("a"))
+        {
+            foreach (var block in blocks)
+            {
+                block.transform.RotateAround(transform.position, new Vector3(0, 1, 0), -90f);
+            }        }
+
+        if (Input.GetKeyDown("d"))
+        {
+            foreach (var block in blocks)
+            {
+                block.transform.RotateAround(transform.position, new Vector3(0, 1, 0), 90f);
+            }        }
+
+        if (Input.GetKeyDown("s"))
+        {
+            foreach (var block in blocks)
+            {
+                block.transform.RotateAround(transform.position, new Vector3(1, 0, 0), -90f);
+            }        }
+        
+        if (Input.GetKeyDown("space"))
+        {
+            DebugBlocks();
+        }
 
         // slowly move down over time
-        transform.Translate(Vector3.down * Time.deltaTime);
+        transform.Translate(Vector3.down * Time.deltaTime, Space.World);
     }
 
     private bool IsMovementAllowed(Vector3 movement)
@@ -56,9 +93,9 @@ public class Shape : MonoBehaviour
         if (blocks.Select(block => block.transform.position + movement)
             .Any(newPosition => 
                 newPosition.z > 6
-                && newPosition.z < 0
-                && newPosition.x < 0
-                && newPosition.x > 6))
+                || newPosition.z < 0
+                || newPosition.x < 0
+                || newPosition.x > 6))
         {
             return false;
         }
@@ -78,5 +115,14 @@ public class Shape : MonoBehaviour
         _gameGrid.AddBlocks(blocks);
 
         GameObject.FindWithTag("ShapeSpawner").GetComponent<ShapeSpawner>().SpawnShape();
+    }
+
+
+    private void DebugBlocks()
+    {
+        foreach (var block in blocks)
+        {
+            print(block.name + " Thinks it's at " + block.transform.position);
+        }
     }
 }

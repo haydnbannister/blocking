@@ -28,14 +28,11 @@ public class GameGrid : MonoBehaviour
             var z = (int) pos.z;
             var y = (int) pos.y;
             blocks[x, y, z] = block;
-            print(x + " " + y + " " + z);
         }
     }
 
     public bool IsSpaceOccupied(Vector3 space)
     {
-        print(space);
-
         var x = (int) space.x;
         var z = (int) space.z;
 

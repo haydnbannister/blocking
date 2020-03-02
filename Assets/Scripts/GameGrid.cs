@@ -27,6 +27,12 @@ public class GameGrid : MonoBehaviour
             var x = (int) pos.x;
             var z = (int) pos.z;
             var y = (int) pos.y;
+            
+            if (blocks[x, y, z] != null) // seems to be some blocks that have undergone rotation have coordinate issues
+            {
+                print("Adding " + block.name + "to " + x + y + z + " but this space already contains " + blocks[x, y, z].name)
+            }
+            
             blocks[x, y, z] = block;
         }
     }

@@ -25,9 +25,11 @@ public class GameGrid : MonoBehaviour
         foreach (var block in newBlocks)
         {
             var pos = block.transform.position;
+
             var x = (int)Math.Round(pos.x, 0);
             var z = (int)Math.Round(pos.z, 0);
             var y = (int)Math.Round(pos.y, 0);
+
             blocks[x, y, z] = block;
         }
         CheckForFilledLayers();

@@ -15,11 +15,6 @@ public class Block : MonoBehaviour
     {
     }
 
-    public Vector3 GetAbsoluteCoordinates()
-    {
-        return transform.position;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (transform.parent == other.transform.parent)
@@ -27,7 +22,7 @@ public class Block : MonoBehaviour
         
         if (other.transform.parent.name == "GameGrid")
         {
-            print("shape " + gameObject.name + " has collided with " + other.gameObject.name);
+            //print("shape " + gameObject.name + " has collided with " + other.gameObject.name);
             GetComponentInParent<Shape>().Land();
             return;
         }
@@ -40,7 +35,7 @@ public class Block : MonoBehaviour
             return;
         }
 
-        print("shape " + gameObject.name + " has collided with " + other.gameObject.name);
+        //print("shape " + gameObject.name + " has collided with " + other.gameObject.name);
         GetComponentInParent<Shape>().Land();
     }
 }

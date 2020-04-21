@@ -9,7 +9,7 @@ public class Shape : MonoBehaviour
 {
     private GameGrid _gameGrid;
 
-    public Block[] blocks;
+    public List<Block> blocks;
 
     public bool inPlay = true;
 
@@ -18,6 +18,11 @@ public class Shape : MonoBehaviour
     void Start()
     {
         _gameGrid = GameObject.FindWithTag("GameGrid").GetComponent<GameGrid>();
+        
+        foreach (Transform child in transform)
+        {
+            blocks.Add(child.GetComponent<Block>());
+        }
     }
 
     // Update is called once per frame
@@ -89,16 +94,31 @@ public class Shape : MonoBehaviour
     private bool IsMovementAllowed(Vector3 movement)
     {
 
-        // check that this movement won't cause a block to leave the game grid
-        if (blocks.Select(block => block.transform.position + movement)
-            .Any(newPosition => 
-                newPosition.z > 6
-                || newPosition.z < 0
-                || newPosition.x < 0
-                || newPosition.x > 6))
+        foreach (var block in blocks)
         {
-            return false;
+            var newPosition = block.transform.position + movement;
+            if (
+                (int) newPosition.z > 6
+                || (int) newPosition.z < 0
+                || (int) newPosition.x < 0
+                || (int) newPosition.x > 6
+            )
+            {
+                return false;
+            }
         }
+        
+        
+         // check that this movement won't cause a block to leave the game grid
+         if (blocks.Select(block => block.transform.position + movement)
+             .Any(newPosition => 
+                 (int)Math.Round(newPosition.z, 0) > 6
+                 || (int)Math.Round(newPosition.z, 0) < 0
+                 || (int)Math.Round(newPosition.x, 0) < 0
+                 || (int)Math.Round(newPosition.x, 0) > 6))
+         {
+             return false;
+         }
 
         // check that this movement won't cause a block hit another horizontally
         return blocks.All(block => !_gameGrid.IsSpaceOccupied(block.transform.position + movement));

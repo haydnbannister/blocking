@@ -18,7 +18,7 @@ public class Shape : MonoBehaviour
     void Start()
     {
         _gameGrid = GameObject.FindWithTag("GameGrid").GetComponent<GameGrid>();
-        
+
         foreach (Transform child in transform)
         {
             blocks.Add(child.GetComponent<Block>());
@@ -49,39 +49,28 @@ public class Shape : MonoBehaviour
         {
             transform.Translate(Vector3.right * 1);
         }
-        
-        
-        
-        
+
+
         if (Input.GetKeyDown("w"))
         {
-            foreach (var block in blocks)
-            {
-                block.transform.RotateAround(transform.position, new Vector3(1, 0, 0), 90f);
-            }
+            Rotate(new Vector3(1, 0, 0), 90f);
         }
 
         if (Input.GetKeyDown("a"))
         {
-            foreach (var block in blocks)
-            {
-                block.transform.RotateAround(transform.position, new Vector3(0, 1, 0), -90f);
-            }        }
+            Rotate(new Vector3(0, 1, 0), -90f);
+        }
 
         if (Input.GetKeyDown("d"))
         {
-            foreach (var block in blocks)
-            {
-                block.transform.RotateAround(transform.position, new Vector3(0, 1, 0), 90f);
-            }        }
+            Rotate(new Vector3(0, 1, 0), 90f);
+        }
 
         if (Input.GetKeyDown("s"))
         {
-            foreach (var block in blocks)
-            {
-                block.transform.RotateAround(transform.position, new Vector3(1, 0, 0), -90f);
-            }        }
-        
+            Rotate(new Vector3(1, 0, 0), -90f);
+        }
+
         if (Input.GetKeyDown("space"))
         {
             DebugBlocks();
@@ -91,34 +80,53 @@ public class Shape : MonoBehaviour
         transform.Translate(Vector3.down * Time.deltaTime, Space.World);
     }
 
-    private bool IsMovementAllowed(Vector3 movement)
+    private void Rotate(Vector3 axis, float angle)
     {
-
+        // rotate the blocks as per the input
         foreach (var block in blocks)
         {
-            var newPosition = block.transform.position + movement;
-            if (
-                (int) newPosition.z > 6
-                || (int) newPosition.z < 0
-                || (int) newPosition.x < 0
-                || (int) newPosition.x > 6
-            )
+            block.transform.RotateAround(transform.position, axis, angle);
+        }
+
+        if (IsPositionAllowed()) return;
+        // if the new position is not allowed, revert the rotation
+        {
+            foreach (var block in blocks)
             {
-                return false;
+                block.transform.RotateAround(transform.position, axis, angle * -1);
             }
         }
+    }
+
+    private bool IsPositionAllowed()
+    {
+        // check that this movement won't cause a block to leave the game grid
+        if (blocks.Select(block => block.transform.position)
+            .Any(newPosition =>
+                (int) Math.Round(newPosition.z, 0) > 6
+                || (int) Math.Round(newPosition.z, 0) < 0
+                || (int) Math.Round(newPosition.x, 0) < 0
+                || (int) Math.Round(newPosition.x, 0) > 6
+                || (int) Math.Round(newPosition.y, 0) < 0))
+        {
+            return false;
+        }
         
-        
-         // check that this movement won't cause a block to leave the game grid
-         if (blocks.Select(block => block.transform.position + movement)
-             .Any(newPosition => 
-                 (int)Math.Round(newPosition.z, 0) > 6
-                 || (int)Math.Round(newPosition.z, 0) < 0
-                 || (int)Math.Round(newPosition.x, 0) < 0
-                 || (int)Math.Round(newPosition.x, 0) > 6))
-         {
-             return false;
-         }
+        return blocks.All(block => !_gameGrid.IsSpaceOccupied(block.transform.position));
+    }
+
+    private bool IsMovementAllowed(Vector3 movement)
+    {
+        // check that this movement won't cause a block to leave the game grid
+        if (blocks.Select(block => block.transform.position + movement)
+            .Any(newPosition =>
+                (int) Math.Round(newPosition.z, 0) > 6
+                || (int) Math.Round(newPosition.z, 0) < 0
+                || (int) Math.Round(newPosition.x, 0) < 0
+                || (int) Math.Round(newPosition.x, 0) > 6))
+        {
+            return false;
+        }
 
         // check that this movement won't cause a block hit another horizontally
         return blocks.All(block => !_gameGrid.IsSpaceOccupied(block.transform.position + movement));

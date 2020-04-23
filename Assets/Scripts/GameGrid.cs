@@ -40,9 +40,8 @@ public class GameGrid : MonoBehaviour
         var x = (int) space.x;
         var z = (int) space.z;
 
-        // lower y by two, one due to 0-indexed array and one due to being part way through the next block down
-        var yUp = (int) Math.Ceiling(space.y - 1f);
-        var yDown = (int) Math.Floor(space.y - 1f);
+        var yUp = (int) Math.Ceiling(space.y);
+        var yDown = (int) Math.Floor(space.y);
         
         return blocks[x, yUp, z] != null || blocks[x, yDown, z] != null;
     }

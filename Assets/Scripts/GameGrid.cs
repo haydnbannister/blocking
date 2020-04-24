@@ -49,13 +49,13 @@ public class GameGrid : MonoBehaviour
 
     public void CheckForFilledLayers()
     {
-        for (var y = 0; y < 1; y++)
+        for (var y = 0; y <= 14; y++)
         {
 
             var isLayerFull = true;
-            for (var x = 0; x < 7; x++)
+            for (var x = 0; x <= 6; x++)
             {
-                for (var z = 0; z < 7; z++)
+                for (var z = 0; z <= 6; z++)
                 {
                     if (blocks[x, y, z] == null)
                     {
@@ -63,17 +63,34 @@ public class GameGrid : MonoBehaviour
                     }
                 }            
             }
-
             if (isLayerFull)
             {
                 ClearLayer(y);
             }
-            
         }
     }
 
     private void ClearLayer(int layer)
     {
+        for (var y = layer; y <= 13; y++)
+        {
+            for (var x = 0; x <= 6; x++)
+            {
+                for (var z = 0; z <= 6; z++)
+                {
+                    if (y == layer)
+                    {
+                        Destroy(blocks[x, y, z].gameObject);
+                    }
+                    if (blocks[x, y, z] != null)
+                    {
+                        blocks[x,y,z].transform.Translate(Vector3.down * 1, Space.World
+                        );
+                    }
+                    blocks[x, y, z] = blocks[x, y+1, z];
+                }            
+            }
+        }
         print("Layer " + layer + "Has been filled in");
     }
     

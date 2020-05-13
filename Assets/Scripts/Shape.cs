@@ -12,12 +12,15 @@ public class Shape : MonoBehaviour
     public List<Block> blocks;
 
     public bool inPlay = true;
+    private ShapeSpawner _shapeSpawner;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _gameGrid = GameObject.FindWithTag("GameGrid").GetComponent<GameGrid>();
+        _shapeSpawner = GameObject.FindWithTag("ShapeSpawner").GetComponent<ShapeSpawner>();
+
 
         foreach (Transform child in transform)
         {
@@ -77,7 +80,7 @@ public class Shape : MonoBehaviour
         }
 
         // slowly move down over time
-        transform.Translate(Vector3.down * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.down * Time.deltaTime * 2, Space.World);
     }
 
     private void Rotate(Vector3 axis, float angle)
@@ -111,7 +114,7 @@ public class Shape : MonoBehaviour
         {
             return false;
         }
-        
+
         return blocks.All(block => !_gameGrid.IsSpaceOccupied(block.transform.position));
     }
 
@@ -142,7 +145,7 @@ public class Shape : MonoBehaviour
 
         _gameGrid.AddBlocks(blocks);
 
-        GameObject.FindWithTag("ShapeSpawner").GetComponent<ShapeSpawner>().SpawnShape();
+        _shapeSpawner.SpawnShape();
     }
 
 

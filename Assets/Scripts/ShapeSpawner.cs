@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ShapeSpawner : MonoBehaviour
@@ -10,14 +9,16 @@ public class ShapeSpawner : MonoBehaviour
 
     void Start()
     {
-        Instantiate(shapeOptions[0], transform.position, Quaternion.identity);
+        var randomNumber = Random.Range(0, shapeOptions.Count);
+        Instantiate(shapeOptions[randomNumber], transform.position, Quaternion.identity);
     }
     
     public void SpawnShape()
     {
         if (!gameOver)
         {
-            Instantiate(shapeOptions[0], transform.position, Quaternion.identity);
+            var randomNumber = Random.Range(0, shapeOptions.Count);
+            Instantiate(shapeOptions[randomNumber], transform.position, Quaternion.identity);
         }
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 // The three dimensional grid that cubes are stored in
 public class GameGrid : MonoBehaviour
 {
-    private const int GameHeight = 15;
+    private const int GameHeight = 12;
     
     // add 10 as safety margin, assumption that no block is more than 10 high
     public Block[,,] blocks = new Block[7, GameHeight + 10, 7];

@@ -28,8 +28,14 @@ public class GameGrid : MonoBehaviour
             var x = (int) Math.Round(pos.x, 0);
             var z = (int) Math.Round(pos.z, 0);
             var y = (int) Math.Round(pos.y, 0);
-
             blocks[x, y, z] = block;
+
+            if (block.GetComponentInParent<Blaster>() != null)
+            {
+                block.GetComponentInParent<Blaster>().Blast();
+                BlasterEffect(x, y, z);
+                return;
+            }
         }
 
         CheckForFilledLayers();
@@ -45,6 +51,32 @@ public class GameGrid : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void BlasterEffect(int xb, int yb, int zb)
+    {
+        for (var y = 0; y <= GameHeight - 1; y++)
+        {
+            for (var x = 0; x <= 6; x++)
+            {
+                for (var z = 0; z <= 6; z++)
+                {
+                    if (blocks[x, y, z] != null)
+                    {
+                        var matchingAxis = 0;
+                        if (xb == x) matchingAxis++;
+                        if (yb == y) matchingAxis++;
+                        if (zb == z) matchingAxis++;
+
+                        if (matchingAxis > 1)
+                        {
+                            Destroy(blocks[x, y, z].gameObject);
+                            blocks[x, y, z] = null;
+                        }
+                    }
+                }
+            }
+        }    
     }
 
     public bool IsSpaceOccupied(Vector3 space)

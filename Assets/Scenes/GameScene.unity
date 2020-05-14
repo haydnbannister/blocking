@@ -683,6 +683,7 @@ MonoBehaviour:
   - {fileID: 5840413400202218154, guid: 108075f63fa336149bd078c31530cf80, type: 3}
   - {fileID: 5840413400202218154, guid: 51cd0448c29253449b486daae91ec16f, type: 3}
   - {fileID: 5840413400202218154, guid: c1074495e723a6b4a8daa26d9b7b7580, type: 3}
+  - {fileID: 5840413400202218154, guid: 7e672cee02effb04cae6c43dca5614b9, type: 3}
   gameOver: 0
 --- !u!4 &1620222265
 Transform:

@@ -23,7 +23,8 @@ public class Shape : MonoBehaviour
 
         foreach (Transform child in transform)
         {
-            blocks.Add(child.GetComponent<Block>());
+            var block = child.GetComponent<Block>();
+            if (block != null) blocks.Add(child.GetComponent<Block>());
         }
     }
 

@@ -72,13 +72,14 @@ public class Shape : MonoBehaviour
             Rotate(new Vector3(1, 0, 0), -90f);
         }
 
-        if (Input.GetKeyDown("space"))
+        // speed downwards
+        if (Input.GetKey("space"))
         {
-            DebugBlocks();
+            transform.Translate(Vector3.down * (Time.deltaTime * 5f), Space.World);
         }
 
         // slowly move down over time
-        transform.Translate(Vector3.down * Time.deltaTime * 2, Space.World);
+        transform.Translate(Vector3.down * (Time.deltaTime * 1f), Space.World);
     }
 
     private void Rotate(Vector3 axis, float angle)

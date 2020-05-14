@@ -13,15 +13,9 @@ public class GameGrid : MonoBehaviour
     public Block[,,] blocks = new Block[7, GameHeight + 10, 7];
     private ShapeSpawner _shapeSpawner;
 
-    // Start is called before the first frame update
     void Start()
     {
         _shapeSpawner = GameObject.FindWithTag("ShapeSpawner").GetComponent<ShapeSpawner>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     // add a shape to the grid when it lands

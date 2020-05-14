@@ -8,17 +8,11 @@ public class ShapeSpawner : MonoBehaviour
 
     public bool gameOver = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         Instantiate(shapeOptions[0], transform.position, Quaternion.identity);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
+    
     public void SpawnShape()
     {
         if (!gameOver)

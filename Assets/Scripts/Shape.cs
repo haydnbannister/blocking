@@ -15,7 +15,6 @@ public class Shape : MonoBehaviour
     private ShapeSpawner _shapeSpawner;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         _gameGrid = GameObject.FindWithTag("GameGrid").GetComponent<GameGrid>();
@@ -28,7 +27,6 @@ public class Shape : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!inPlay) return;

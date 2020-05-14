@@ -7,7 +7,10 @@ using UnityEngine;
 // The three dimensional grid that cubes are stored in
 public class GameGrid : MonoBehaviour
 {
-    public Block[,,] blocks = new Block[7, 25, 7];
+    private const int GameHeight = 15;
+    
+    // add 10 as safety margin, assumption that no block is more than 10 high
+    public Block[,,] blocks = new Block[7, GameHeight + 10, 7];
     private ShapeSpawner _shapeSpawner;
 
     // Start is called before the first frame update
@@ -42,7 +45,7 @@ public class GameGrid : MonoBehaviour
         {
             if (block != null)
             {
-                if ((int) Math.Round(block.transform.position.y, 0) > 14)
+                if ((int) Math.Round(block.transform.position.y, 0) > GameHeight -1)
                 {
                     _shapeSpawner.gameOver = true;
                 }
@@ -58,7 +61,7 @@ public class GameGrid : MonoBehaviour
         var yUp = (int) Math.Ceiling(space.y);
         var yDown = (int) Math.Floor(space.y);
 
-        if (yUp > 14 || yDown > 14)
+        if (yUp > GameHeight - 1 || yDown > GameHeight - 1)
         {
             return false;
         }
@@ -69,7 +72,7 @@ public class GameGrid : MonoBehaviour
 
     public void CheckForFilledLayers()
     {
-        for (var y = 0; y <= 14; y++)
+        for (var y = 0; y <= GameHeight - 1; y++)
         {
             var isLayerFull = true;
             for (var x = 0; x <= 6; x++)
@@ -93,7 +96,7 @@ public class GameGrid : MonoBehaviour
 
     private void ClearLayer(int layer)
     {
-        for (var y = layer; y <= 13; y++)
+        for (var y = layer; y < GameHeight - 1; y++)
         {
             for (var x = 0; x <= 6; x++)
             {

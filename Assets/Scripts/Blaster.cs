@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Blaster : MonoBehaviour
 {
+    public GameObject explosionPrefab;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class Blaster : MonoBehaviour
 
     public void Blast()
     {
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

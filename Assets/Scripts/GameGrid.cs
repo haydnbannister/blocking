@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 // The three dimensional grid that cubes are stored in
 public class GameGrid : MonoBehaviour
@@ -12,6 +13,8 @@ public class GameGrid : MonoBehaviour
     private ShapeSpawner _shapeSpawner;
     public GameObject endGameUI;
     public GameObject newGameUI;
+    public TextMeshProUGUI scoreText;
+    public int score = 0;
 
     private const int GameHeight = 12;
     
@@ -121,6 +124,8 @@ public class GameGrid : MonoBehaviour
             {
                 ClearLayer(y);
                 y--;
+                score++;
+                scoreText.text = score.ToString();
             }
         }
     }

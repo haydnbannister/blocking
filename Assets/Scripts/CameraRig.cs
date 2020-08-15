@@ -8,11 +8,11 @@ public class CameraRig : MonoBehaviour
     {
         if (Input.GetKey("q"))
         {
-            transform.Rotate(new Vector3(0, 1, 0), 2f);
+            transform.Rotate(new Vector3(0, 1, 0), 0.5f);
         }
         if (Input.GetKey("e"))
         {
-            transform.Rotate(new Vector3(0, 1, 0), -2f);
+            transform.Rotate(new Vector3(0, 1, 0), -0.5f);
         }
     }
 }

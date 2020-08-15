@@ -10,18 +10,30 @@ public class ShapeSpawner : MonoBehaviour
 
     void Start()
     {
-        var randomNumber = Random.Range(0, shapeOptions.Count);
-        Instantiate(shapeOptions[randomNumber], transform.position, Quaternion.identity);
+        SpawnRandom();
     }
     
     public void SpawnShape()
     {
         if (!gameOver)
         {
-            var randomNumber = Random.Range(0, shapeOptions.Count);
-            Instantiate(shapeOptions[randomNumber], transform.position, Quaternion.identity);
-        } else {
-            Instantiate(gameOverEffect, new Vector3(3, 1, 3), Quaternion.identity);
+            SpawnRandom();
         }
+    }
+
+    private void SpawnRandom() 
+    {
+        var randomNumber = Random.Range(0, shapeOptions.Count);
+        Instantiate(shapeOptions[randomNumber], transform.position, Quaternion.identity);
+    }
+
+    public void EndGame() {
+            gameOver = true;
+            EndGameEffect();
+    }
+
+    private void EndGameEffect()
+    { 
+            Instantiate(gameOverEffect, new Vector3(3, 1, 3), Quaternion.identity);
     }
 }

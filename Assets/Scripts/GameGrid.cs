@@ -3,17 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // The three dimensional grid that cubes are stored in
 public class GameGrid : MonoBehaviour
 {
     public GameObject blasterEffectExplosionPrefab;
+    private ShapeSpawner _shapeSpawner;
+    public GameObject endGameUI;
+    public GameObject newGameUI;
 
     private const int GameHeight = 12;
     
     // add 10 as safety margin, assumption that no block is more than 10 high
     public Block[,,] blocks = new Block[7, GameHeight + 10, 7];
-    private ShapeSpawner _shapeSpawner;
+    
 
     void Start()
     {
@@ -94,7 +98,6 @@ public class GameGrid : MonoBehaviour
         {
             return false;
         }
-
         return blocks[x, yUp, z] != null || blocks[x, yDown, z] != null;
     }
 
@@ -114,7 +117,6 @@ public class GameGrid : MonoBehaviour
                     }
                 }
             }
-
             if (isLayerFull)
             {
                 ClearLayer(y);
@@ -146,14 +148,11 @@ public class GameGrid : MonoBehaviour
                 }
             }
         }
-
         print("Layer " + layer + "Has been filled in");
     }
 
-    private void HandleGameOver() 
+    public void HandleGameOver() 
     {
-
-        // check if the game is over
         foreach (var block in blocks)
         {
             if (block != null)
@@ -163,6 +162,14 @@ public class GameGrid : MonoBehaviour
                 block.gameObject.GetComponent<Rigidbody>().useGravity = true;
             }
         }
-        _shapeSpawner.gameOver = true;
+        _shapeSpawner.EndGame();
+
+        endGameUI.SetActive(false);
+        newGameUI.SetActive(true);
+    }
+
+    public void RestartScene() 
+    {
+         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

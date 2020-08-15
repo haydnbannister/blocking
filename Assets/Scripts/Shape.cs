@@ -32,6 +32,22 @@ public class Shape : MonoBehaviour
     {
         if (!inPlay) return;
 
+        // if game has ended since this was created
+        if (_shapeSpawner.gameOver) 
+        {
+            foreach (var block in blocks)
+            {
+                if (block != null)
+                {
+                    block.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                    block.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                    block.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                }
+            }
+            inPlay = false;
+            return;
+        }
+
         if (Input.GetKeyDown("up") && IsMovementAllowed(new Vector3(0f, 0f, 1f)))
         {
             transform.Translate(Vector3.forward * 1);

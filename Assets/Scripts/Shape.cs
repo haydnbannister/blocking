@@ -144,6 +144,10 @@ public class Shape : MonoBehaviour
         inPlay = false;
 
         _gameGrid.AddBlocks(blocks);
+        
+        // set to nearest whole coordinate. Prevents object going part way through another in between frames and before collison detection
+        Vector3 pos = this.transform.position;
+        this.transform.position = new Vector3((int) Math.Round(pos.x, 0), (int) Math.Round(pos.y, 0), (int) Math.Round(pos.z, 0));
 
         _shapeSpawner.SpawnShape();
     }

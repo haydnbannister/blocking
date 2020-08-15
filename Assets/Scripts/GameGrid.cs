@@ -49,7 +49,7 @@ public class GameGrid : MonoBehaviour
             {
                 if ((int) Math.Round(block.transform.position.y, 0) > GameHeight -1)
                 {
-                    _shapeSpawner.gameOver = true;
+                    HandleGameOver();
                 }
             }
         }
@@ -148,5 +148,21 @@ public class GameGrid : MonoBehaviour
         }
 
         print("Layer " + layer + "Has been filled in");
+    }
+
+    private void HandleGameOver() 
+    {
+
+        // check if the game is over
+        foreach (var block in blocks)
+        {
+            if (block != null)
+            {
+                block.gameObject.GetComponent<BoxCollider>().isTrigger = false;
+                block.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                block.gameObject.GetComponent<Rigidbody>().useGravity = true;
+            }
+        }
+        _shapeSpawner.gameOver = true;
     }
 }

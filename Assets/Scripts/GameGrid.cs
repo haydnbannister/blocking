@@ -7,6 +7,8 @@ using UnityEngine;
 // The three dimensional grid that cubes are stored in
 public class GameGrid : MonoBehaviour
 {
+    public GameObject blasterEffectExplosionPrefab;
+
     private const int GameHeight = 12;
     
     // add 10 as safety margin, assumption that no block is more than 10 high
@@ -70,6 +72,7 @@ public class GameGrid : MonoBehaviour
 
                         if (matchingAxis > 1)
                         {
+                            Instantiate(blasterEffectExplosionPrefab, new Vector3(x, y, z), Quaternion.identity);
                             Destroy(blocks[x, y, z].gameObject);
                             blocks[x, y, z] = null;
                         }

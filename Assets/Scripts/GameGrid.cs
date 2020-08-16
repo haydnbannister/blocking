@@ -45,6 +45,12 @@ public class GameGrid : MonoBehaviour
                 BlasterEffect(x, y, z);
                 return;
             }
+            if (block.GetComponentInParent<Hammer>() != null)
+            {
+                HammerEffect(x, z);
+                Destroy(block.gameObject);
+                return;
+            }
         }
 
         CheckForFilledLayers();
@@ -87,6 +93,26 @@ public class GameGrid : MonoBehaviour
                 }
             }
         }    
+    }
+
+    private void HammerEffect(int xb, int zb)
+    {
+        int changes = 0;
+        for (var y = 1; y <= GameHeight - 1; y++)
+        {
+            if (blocks[xb, y, zb] != null)
+            {
+                if (blocks[xb, y - 1, zb] == null)
+                {
+                    blocks[xb, y -1, zb] = blocks[xb, y, zb];
+                    blocks[xb, y, zb].transform.position = new Vector3(xb, y -1, zb);
+                    blocks[xb, y, zb] = null;
+                    changes++;
+                }
+            }
+        } 
+        // recurse to cascade through bigger gaps
+        if (changes > 0) HammerEffect(xb, zb);
     }
 
     public bool IsSpaceOccupied(Vector3 space)

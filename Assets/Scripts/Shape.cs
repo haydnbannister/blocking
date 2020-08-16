@@ -101,6 +101,10 @@ public class Shape : MonoBehaviour
 
     private void Rotate(Vector3 axis, float angle)
     {
+        if (GetComponent<ExplosionPowerup>()) {
+            return;
+        }
+
         // rotate the blocks as per the input
         foreach (var block in blocks)
         {

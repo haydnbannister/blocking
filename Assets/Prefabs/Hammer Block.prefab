@@ -26,7 +26,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4313498495992468500}
   - component: {fileID: 247309906922433681}
-  - component: {fileID: 6732666466775769829}
+  - component: {fileID: 6537024461139411754}
   m_Layer: 0
   m_Name: Hammer Block
   m_TagString: Untagged
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blocks: []
   inPlay: 1
---- !u!114 &6732666466775769829
+--- !u!114 &6537024461139411754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,9 +72,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5840413400202218154}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2188bc2b710afb4c81d72f5bd0f3c45, type: 3}
+  m_Script: {fileID: 11500000, guid: 939737122663a8b488192679ed99cc74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: hammer
+  explosionPrefab: {fileID: 100010, guid: 426bc52bbb69d9841838b302080129e5, type: 3}
 --- !u!1001 &285974756381673615
 PrefabInstance:
   m_ObjectHideFlags: 0

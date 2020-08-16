@@ -39,16 +39,28 @@ public class GameGrid : MonoBehaviour
             var y = (int) Math.Round(pos.y, 0);
             blocks[x, y, z] = block;
 
-            if (block.GetComponentInParent<Blaster>() != null)
+            ExplosionPowerup expPowerUp = block.GetComponentInParent<ExplosionPowerup>();
+            if (expPowerUp != null)
             {
-                block.GetComponentInParent<Blaster>().Blast();
-                BlasterEffect(x, y, z);
-                return;
-            }
-            if (block.GetComponentInParent<Hammer>() != null)
-            {
-                HammerEffect(x, z);
-                Destroy(block.gameObject);
+                string type = expPowerUp.type;
+                switch (type) {
+                    case "blaster":
+                        VerticalBlasterEffect(x, y, z);
+                        break;
+                    case "hammer":
+                        HammerEffect(x, z);
+                        break;
+                    case "3x3x3":
+                        BombEffect(x, y, z, 1);
+                        break;
+                    case "5x5x5":
+                        BombEffect(x, y, z, 2);
+                        break;
+                    default:
+                        Console.WriteLine("Unhandled explosion powerup type: " + type);
+                        break;
+                }
+                expPowerUp.Blast();
                 return;
             }
         }
@@ -68,29 +80,15 @@ public class GameGrid : MonoBehaviour
         }
     }
 
-    private void BlasterEffect(int xb, int yb, int zb)
+    private void VerticalBlasterEffect(int xb, int yb, int zb)
     {
         for (var y = 0; y <= GameHeight - 1; y++)
         {
-            for (var x = 0; x <= 6; x++)
+            if (blocks[xb, y, zb] != null)
             {
-                for (var z = 0; z <= 6; z++)
-                {
-                    if (blocks[x, y, z] != null)
-                    {
-                        var matchingAxis = 0;
-                        if (xb == x) matchingAxis++;
-                        if (yb == y) matchingAxis++;
-                        if (zb == z) matchingAxis++;
-
-                        if (matchingAxis > 1)
-                        {
-                            Instantiate(blasterEffectExplosionPrefab, new Vector3(x, y, z), Quaternion.identity);
-                            Destroy(blocks[x, y, z].gameObject);
-                            blocks[x, y, z] = null;
-                        }
-                    }
-                }
+                Instantiate(blasterEffectExplosionPrefab, new Vector3(xb, y, zb), Quaternion.identity);
+                Destroy(blocks[xb, y, zb].gameObject);
+                blocks[xb, y, zb] = null;
             }
         }    
     }
@@ -113,6 +111,28 @@ public class GameGrid : MonoBehaviour
         } 
         // recurse to cascade through bigger gaps
         if (changes > 0) HammerEffect(xb, zb);
+    }
+
+    private void BombEffect(int xb, int yb, int zb, int size)
+    {
+        for (var y = yb - size; y <= yb + size; y++)
+        {
+            for (var x = xb - size; x <= xb + size; x++)
+            {
+                for (var z = zb - size; z <= zb + size; z++)
+                {
+                    if (x >= 0 && y >= 0 && z >= 0 && x <= 6 && y < GameHeight && z <= 6) 
+                    {
+                        if (blocks[x, y, z] != null)
+                        {
+                                Instantiate(blasterEffectExplosionPrefab, new Vector3(x, y, z), Quaternion.identity);
+                                Destroy(blocks[x, y, z].gameObject);
+                                blocks[x, y, z] = null;
+                        }
+                    }
+                }
+            }
+        }    
     }
 
     public bool IsSpaceOccupied(Vector3 space)

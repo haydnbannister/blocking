@@ -3,28 +3,40 @@ using UnityEngine;
 
 public class ShapeSpawner : MonoBehaviour
 {
-    public List<GameObject> shapeOptions;
+    public List<GameObject> normalShapeOptions;
+    public List<GameObject> powerupShapeOptions;
     public GameObject gameOverEffect;
 
     public bool gameOver = false;
 
     void Start()
     {
-        SpawnRandom();
+        SpawnShape();
     }
     
     public void SpawnShape()
     {
         if (!gameOver)
         {
-            SpawnRandom();
+            var randomNumber = Random.Range(1, 101);
+            if (randomNumber > 10) 
+            {
+                SpawnNormal();
+            } else 
+            {
+                SpawnPowerup();
+            }
         }
     }
 
-    private void SpawnRandom() 
-    {
-        var randomNumber = Random.Range(0, shapeOptions.Count);
-        Instantiate(shapeOptions[randomNumber], transform.position, Quaternion.identity);
+    private void SpawnNormal() {
+        var randomNumber = Random.Range(0, normalShapeOptions.Count);
+        Instantiate(normalShapeOptions[randomNumber], transform.position, Quaternion.identity);
+    }
+
+    private void SpawnPowerup() {
+        var randomNumber = Random.Range(0, powerupShapeOptions.Count);
+        Instantiate(powerupShapeOptions[randomNumber], transform.position, Quaternion.identity);
     }
 
     public void EndGame() {

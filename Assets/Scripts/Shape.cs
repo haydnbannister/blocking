@@ -51,21 +51,25 @@ public class Shape : MonoBehaviour
         if (Input.GetKeyDown("up") && IsMovementAllowed(new Vector3(0f, 0f, 1f)))
         {
             transform.Translate(Vector3.forward * 1);
+            _gameGrid.PlaySound("Click");
         }
 
         if (Input.GetKeyDown("down") && IsMovementAllowed(new Vector3(0f, 0f, -1f)))
         {
             transform.Translate(Vector3.back * 1);
+            _gameGrid.PlaySound("Click");
         }
 
         if (Input.GetKeyDown("left") && IsMovementAllowed(new Vector3(-1f, 0f, 0f)))
         {
             transform.Translate(Vector3.left * 1);
+            _gameGrid.PlaySound("Click");
         }
 
         if (Input.GetKeyDown("right") && IsMovementAllowed(new Vector3(1f, 0f, 0f)))
         {
             transform.Translate(Vector3.right * 1);
+            _gameGrid.PlaySound("Click");
         }
 
 
@@ -111,14 +115,18 @@ public class Shape : MonoBehaviour
             block.transform.RotateAround(transform.position, axis, angle);
         }
 
-        if (IsPositionAllowed()) return;
+        if (IsPositionAllowed()) {
+            _gameGrid.PlaySound("Click");
+            return;
+        };
+        
+        _gameGrid.PlaySound("Invalid");
         // if the new position is not allowed, revert the rotation
+        foreach (var block in blocks)
         {
-            foreach (var block in blocks)
-            {
-                block.transform.RotateAround(transform.position, axis, angle * -1);
-            }
+            block.transform.RotateAround(transform.position, axis, angle * -1);
         }
+        
     }
 
     private bool IsPositionAllowed()
@@ -164,6 +172,7 @@ public class Shape : MonoBehaviour
         inPlay = false;
 
         _gameGrid.AddBlocks(blocks);
+        _gameGrid.PlaySound("Land");
         
         // set to nearest whole coordinate. Prevents object going part way through another in between frames and before collison detection
         Vector3 pos = this.transform.position;

@@ -5,18 +5,24 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using OSSC;
 
 // The three dimensional grid that cubes are stored in
 public class GameGrid : MonoBehaviour
 {
+    public SoundController soundController;
     public GameObject blasterEffectExplosionPrefab;
     private ShapeSpawner _shapeSpawner;
     public GameObject endGameUI;
     public GameObject newGameUI;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI pauseText;
     public int score = 0;
 
-    private const int GameHeight = 12;
+    public int numBlocksOnGrid = 0;
+
+
+    private const int GameHeight = 13;
     
     // add 10 as safety margin, assumption that no block is more than 10 high
     public Block[,,] blocks = new Block[7, GameHeight + 10, 7];
@@ -25,6 +31,25 @@ public class GameGrid : MonoBehaviour
     void Start()
     {
         _shapeSpawner = GameObject.FindWithTag("ShapeSpawner").GetComponent<ShapeSpawner>();
+    }
+
+    public void TogglePause() {
+        if (Time.timeScale == 1) 
+        {
+            pauseText.text = "PLAY";
+            Time.timeScale = 0;
+        } else {
+            pauseText.text = "PAUSE";
+            Time.timeScale = 1;
+        }
+    }
+
+    public void PlaySound(string soundName)
+    {
+        PlaySoundSettings settings = new PlaySoundSettings();
+        settings.Init();
+        settings.name = soundName;
+        soundController.Play(settings);
     }
 
     // add a shape to the grid when it lands
@@ -38,6 +63,7 @@ public class GameGrid : MonoBehaviour
             var z = (int) Math.Round(pos.z, 0);
             var y = (int) Math.Round(pos.y, 0);
             blocks[x, y, z] = block;
+            numBlocksOnGrid++;
 
             ExplosionPowerup expPowerUp = block.GetComponentInParent<ExplosionPowerup>();
             if (expPowerUp != null)
@@ -49,6 +75,7 @@ public class GameGrid : MonoBehaviour
                         break;
                     case "hammer":
                         HammerEffect(x, z);
+                        numBlocksOnGrid--;
                         break;
                     case "3x3x3":
                         BombEffect(x, y, z, 1);
@@ -60,6 +87,7 @@ public class GameGrid : MonoBehaviour
                         Console.WriteLine("Unhandled explosion powerup type: " + type);
                         break;
                 }
+                PlaySound("Boom");
                 expPowerUp.Blast();
                 return;
             }
@@ -89,6 +117,7 @@ public class GameGrid : MonoBehaviour
                 Instantiate(blasterEffectExplosionPrefab, new Vector3(xb, y, zb), Quaternion.identity);
                 Destroy(blocks[xb, y, zb].gameObject);
                 blocks[xb, y, zb] = null;
+                numBlocksOnGrid--;
             }
         }    
     }
@@ -128,6 +157,7 @@ public class GameGrid : MonoBehaviour
                                 Instantiate(blasterEffectExplosionPrefab, new Vector3(x, y, z), Quaternion.identity);
                                 Destroy(blocks[x, y, z].gameObject);
                                 blocks[x, y, z] = null;
+                                numBlocksOnGrid--;
                         }
                     }
                 }
@@ -187,6 +217,7 @@ public class GameGrid : MonoBehaviour
                     if (y == layer)
                     {
                         Destroy(blocks[x, y, z].gameObject);
+                        numBlocksOnGrid--;
                     }
 
                     if (blocks[x, y, z] != null)
@@ -215,6 +246,7 @@ public class GameGrid : MonoBehaviour
         }
         _shapeSpawner.EndGame();
 
+        PlaySound("GameOver");
         endGameUI.SetActive(false);
         newGameUI.SetActive(true);
     }

@@ -1,17 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShapeSpawner : MonoBehaviour
 {
     public List<GameObject> normalShapeOptions;
     public List<GameObject> powerupShapeOptions;
     public GameObject gameOverEffect;
+    public Toggle powerupsEnabled;
+    public GameGrid gameGrid;
 
     public bool gameOver = false;
 
     void Start()
     {
-        SpawnShape();
+        SpawnNormal();
     }
     
     public void SpawnShape()
@@ -19,7 +22,10 @@ public class ShapeSpawner : MonoBehaviour
         if (!gameOver)
         {
             var randomNumber = Random.Range(1, 101);
-            if (randomNumber > 10) 
+
+            
+            // max amount of blocks on board is 7x7x12=588, so if you somehow fill up board then +~60% chance of powerup each spawn
+            if (randomNumber > gameGrid.numBlocksOnGrid / 10/* || !powerupsEnabled.isOn*/) 
             {
                 SpawnNormal();
             } else 

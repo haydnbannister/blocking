@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d124957088fb4253ac0d826b09325bf, type: 3}
+  m_Name: SoundControllerData
+  m_EditorClassIdentifier: 
+  items:
+  - name: Effects
+    soundItems:
+    - name: GameOver
+      tagID: -1
+      mixer: {fileID: 0}
+      clips:
+      - {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
+      isRandomPitch: 0
+      pitchRange:
+        min: 1
+        max: 1
+      isRandomVolume: 0
+      volumeRange:
+        min: 1
+        max: 1
+      volume: 1
+    - name: Boom
+      tagID: -1
+      mixer: {fileID: 0}
+      clips:
+      - {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
+      isRandomPitch: 0
+      pitchRange:
+        min: 1
+        max: 1
+      isRandomVolume: 0
+      volumeRange:
+        min: 1
+        max: 1
+      volume: 1
+    - name: Land
+      tagID: -1
+      mixer: {fileID: 0}
+      clips:
+      - {fileID: 8300000, guid: b43d102aac6b145468dcaa94a5cccae1, type: 3}
+      isRandomPitch: 0
+      pitchRange:
+        min: 1
+        max: 1
+      isRandomVolume: 0
+      volumeRange:
+        min: 1
+        max: 1
+      volume: 0.5
+    - name: Invalid
+      tagID: -1
+      mixer: {fileID: 0}
+      clips:
+      - {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
+      isRandomPitch: 0
+      pitchRange:
+        min: 1
+        max: 1
+      isRandomVolume: 0
+      volumeRange:
+        min: 1
+        max: 1
+      volume: 0.5
+    - name: Click
+      tagID: -1
+      mixer: {fileID: 0}
+      clips:
+      - {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
+      isRandomPitch: 0
+      pitchRange:
+        min: 1
+        max: 1
+      isRandomVolume: 0
+      volumeRange:
+        min: 1
+        max: 1
+      volume: 1
+    audioObjectPrefab: {fileID: 0}
+    usingDefaultPrefab: 1
+    categoryVolume: 1
+    foldOutSoundItems: 1
+    soundsSearchName: 
+    isMute: 0
+  - name: Music
+    soundItems:
+    - name: Music
+      tagID: -1
+      mixer: {fileID: 0}
+      clips:
+      - {fileID: 8300000, guid: 5c9f99afa0c7dae4091eb7d0cbc020d8, type: 3}
+      - {fileID: 8300000, guid: 94aac5421366d7f42a39c2eb65809ac7, type: 3}
+      isRandomPitch: 0
+      pitchRange:
+        min: 1
+        max: 1
+      isRandomVolume: 0
+      volumeRange:
+        min: 1
+        max: 1
+      volume: 0.4
+    audioObjectPrefab: {fileID: 0}
+    usingDefaultPrefab: 1
+    categoryVolume: 1
+    foldOutSoundItems: 1
+    soundsSearchName: 
+    isMute: 0
+  foldOutCategories: 1
+  foldOutTags: 0
+  assetName: 
+  soundTags:
+    _tagsData: []

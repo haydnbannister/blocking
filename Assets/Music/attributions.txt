@@ -1,7 +1,10 @@
-A New Way by Lesion X | https://soundcloud.com/lesionxbeats
-A Journey Through The Universe by Lesion X | https://soundcloud.com/lesionxbeats
-Music promoted by https://www.free-stock-music.com
-Creative Commons Attribution 3.0 Unported License
-https://creativecommons.org/licenses/by/3.0/deed.en_US
+Songs:
+The Other Side | Lesion X https://soundcloud.com/lesionxbeats<
+A New Way | Lesion X https://soundcloud.com/lesionxbeats
+A Journey Through The Universe | Lesion X https://soundcloud.com/lesionxbeats
 
-Sound Effects | Dustyroom - dustyroom.com
+Block Textures | Ciathyza https://www.ciathyza.com
+Rocket Models | AurynSky https://twitter.com/AurynSky
+Sound Effects | Dustyroom http://dustyroom.com
+Sound Controller | Dumitru Molosnic https://github.com/dimixar/audio-controller-unity
+Hammer Model | BasicCore https://srjoke.artstation.com

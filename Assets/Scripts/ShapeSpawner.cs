@@ -24,8 +24,8 @@ public class ShapeSpawner : MonoBehaviour
             var randomNumber = Random.Range(1, 101);
 
             
-            // max amount of blocks on board is 7x7x12=588, so if you somehow fill up board then +~60% chance of powerup each spawn
-            if (randomNumber > gameGrid.numBlocksOnGrid / 10/* || !powerupsEnabled.isOn*/) 
+            // max amount of blocks on board is 7x7x12=588, so if you somehow fill up board then +~75% chance of powerup each spawn
+            if (randomNumber > 5 + gameGrid.numBlocksOnGrid / 8/* || !powerupsEnabled.isOn*/) 
             {
                 SpawnNormal();
             } else 

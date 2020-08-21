@@ -200,6 +200,7 @@ public class GameGrid : MonoBehaviour
             {
                 ClearLayer(y);
                 y--;
+                numBlocksOnGrid = numBlocksOnGrid - 49;
                 score++;
                 scoreText.text = score.ToString();
             }
@@ -217,7 +218,6 @@ public class GameGrid : MonoBehaviour
                     if (y == layer)
                     {
                         Destroy(blocks[x, y, z].gameObject);
-                        numBlocksOnGrid--;
                     }
 
                     if (blocks[x, y, z] != null)
@@ -253,6 +253,9 @@ public class GameGrid : MonoBehaviour
 
     public void RestartScene() 
     {
+        if (Time.timeScale == 0) {
+            Time.timeScale =1;
+        }
          SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

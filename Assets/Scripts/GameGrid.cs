@@ -75,6 +75,7 @@ public class GameGrid : MonoBehaviour
                         break;
                     case "hammer":
                         HammerEffect(x, z);
+                        CheckForFilledLayers();
                         numBlocksOnGrid--;
                         break;
                     case "3x3x3":

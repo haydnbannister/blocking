@@ -76,6 +76,8 @@ namespace OSSC
                 settings.Init();
                 settings.name = "Music";
                 settings.isLooped = true;
+                settings.fadeInTime = 3f;
+                settings.fadeOutTime = 3f;
                 Play(settings);
             }
         }

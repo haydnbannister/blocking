@@ -97,9 +97,9 @@ MonoBehaviour:
       tagID: -1
       mixer: {fileID: 0}
       clips:
+      - {fileID: 8300000, guid: 1cc990155533d5e4fbe56fcde956d395, type: 3}
       - {fileID: 8300000, guid: 5c9f99afa0c7dae4091eb7d0cbc020d8, type: 3}
-      - {fileID: 8300000, guid: 94aac5421366d7f42a39c2eb65809ac7, type: 3}
-      - {fileID: 8300000, guid: 61a8553c5e651d74481f2be4957f7ffa, type: 3}
+      - {fileID: 8300000, guid: e625afec059c0864e9d068ee65ceb005, type: 3}
       isRandomPitch: 0
       pitchRange:
         min: 1

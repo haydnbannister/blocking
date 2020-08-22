@@ -6,6 +6,7 @@ public class ShapeSpawner : MonoBehaviour
 {
     public List<GameObject> normalShapeOptions;
     public List<GameObject> powerupShapeOptions;
+    public GameObject blockingLogoPrefab;
     public GameObject gameOverEffect;
     public Toggle powerupsEnabled;
     public GameGrid gameGrid;
@@ -51,7 +52,11 @@ public class ShapeSpawner : MonoBehaviour
     }
 
     private void EndGameEffect()
-    { 
-            Instantiate(gameOverEffect, new Vector3(3, 1, 3), Quaternion.identity);
-    }
+    {         
+        Instantiate(gameOverEffect, new Vector3(3, 1, 3), Quaternion.identity);
+
+        Transform cameraRig = GameObject.Find("CameraRig").transform;
+        GameObject logo = Instantiate(blockingLogoPrefab, new Vector3(3, -2, 3), cameraRig.rotation);
+        logo.transform.parent = cameraRig;
+    } 
 }

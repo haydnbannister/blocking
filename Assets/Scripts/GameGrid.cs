@@ -249,7 +249,6 @@ public class GameGrid : MonoBehaviour
 
         PlaySound("GameOver");
         endGameUI.SetActive(false);
-        newGameUI.SetActive(true);
     }
 
     public void RestartScene() 

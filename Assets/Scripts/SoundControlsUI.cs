@@ -20,8 +20,8 @@ public class SoundControlsUI : MonoBehaviour
         settings.Init();
         settings.name = "Music";
         settings.isLooped = true;
-        settings.fadeInTime = 3f;
-        settings.fadeOutTime = 3f;
+        //settings.fadeInTime = 3f;
+        //settings.fadeOutTime = 3f;
         soundController.Play(settings);
     }
 

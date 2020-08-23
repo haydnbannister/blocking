@@ -229,7 +229,6 @@ public class GameGrid : MonoBehaviour
                 }
             }
         }
-        print("Layer " + layer + "Has been filled in");
     }
 
     public void HandleGameOver() 

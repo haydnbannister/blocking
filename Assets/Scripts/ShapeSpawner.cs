@@ -8,14 +8,27 @@ public class ShapeSpawner : MonoBehaviour
     public List<GameObject> powerupShapeOptions;
     public GameObject blockingLogoPrefab;
     public GameObject gameOverEffect;
-    public Toggle powerupsEnabled;
     public GameGrid gameGrid;
+    public Toggle powerupToggle;
 
     public bool gameOver = false;
 
     void Start()
     {
         SpawnNormal();
+
+        GameObject powerUpToggleCanvas =  GameObject.Find("Canvas Powerups Toggle");
+
+        Transform[] trs= powerUpToggleCanvas.GetComponentsInChildren<Transform>(true);
+        foreach(Transform t in trs){
+            if(t.name == "TogglePowerups")
+            {
+                powerupToggle = t.gameObject.GetComponent<Toggle>();
+                powerupToggle.gameObject.SetActive(false);      
+                return;      
+            }
+        }
+        
     }
     
     public void SpawnShape()
@@ -24,9 +37,8 @@ public class ShapeSpawner : MonoBehaviour
         {
             var randomNumber = Random.Range(1, 101);
 
-            
             // max amount of blocks on board is 7x7x12=588, so if you somehow fill up board then +~75% chance of powerup each spawn
-            if (randomNumber > 5 + gameGrid.numBlocksOnGrid / 8/* || !powerupsEnabled.isOn*/) 
+            if (!powerupToggle.isOn || randomNumber > 5 + gameGrid.numBlocksOnGrid / 8) 
             {
                 SpawnNormal();
             } else 
@@ -47,8 +59,11 @@ public class ShapeSpawner : MonoBehaviour
     }
 
     public void EndGame() {
+        if (!gameOver) 
+        {
             gameOver = true;
             EndGameEffect();
+        }
     }
 
     private void EndGameEffect()

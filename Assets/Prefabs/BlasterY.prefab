@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: blaster
-  explosionPrefab: {fileID: 100010, guid: d62c0f1853eb57c44890dc833285ee03, type: 3}
+  explosionPrefab: {fileID: 100010, guid: 47c82acc4dbf7d14294a04bdc3e83f13, type: 3}
 --- !u!54 &5927666239533430632
 Rigidbody:
   m_ObjectHideFlags: 0

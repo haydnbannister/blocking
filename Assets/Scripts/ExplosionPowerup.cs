@@ -9,6 +9,7 @@ public class ExplosionPowerup : MonoBehaviour
 
     public void Blast()
     {
+        if (gameObject.name == "BigBomb5x5x5(Clone)"){}
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

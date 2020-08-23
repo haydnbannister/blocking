@@ -105,7 +105,7 @@ public class Shape : MonoBehaviour
 
     private void Rotate(Vector3 axis, float angle)
     {
-        if (GetComponent<ExplosionPowerup>()) {
+        if (GetComponent<ExplosionPowerup>() || gameObject.name == "Shape2x2x2(Clone)") {
             return;
         }
 

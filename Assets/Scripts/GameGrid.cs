@@ -115,7 +115,6 @@ public class GameGrid : MonoBehaviour
         {
             if (blocks[xb, y, zb] != null)
             {
-                Instantiate(blasterEffectExplosionPrefab, new Vector3(xb, y, zb), Quaternion.identity);
                 Destroy(blocks[xb, y, zb].gameObject);
                 blocks[xb, y, zb] = null;
                 numBlocksOnGrid--;
@@ -155,7 +154,6 @@ public class GameGrid : MonoBehaviour
                     {
                         if (blocks[x, y, z] != null)
                         {
-                                Instantiate(blasterEffectExplosionPrefab, new Vector3(x, y, z), Quaternion.identity);
                                 Destroy(blocks[x, y, z].gameObject);
                                 blocks[x, y, z] = null;
                                 numBlocksOnGrid--;
@@ -245,9 +243,11 @@ public class GameGrid : MonoBehaviour
                 block.gameObject.GetComponent<Rigidbody>().useGravity = true;
             }
         }
-        _shapeSpawner.EndGame();
-
-        PlaySound("GameOver");
+        if (!_shapeSpawner.gameOver) {
+            _shapeSpawner.EndGame();
+            PlaySound("GameOver");
+        }
+        _shapeSpawner.powerupToggle.gameObject.SetActive(true);        
         endGameUI.SetActive(false);
     }
 

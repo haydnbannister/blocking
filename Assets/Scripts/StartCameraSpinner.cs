@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class StartCameraSpinner : MonoBehaviour
 {
+    public float speed;
     void Update()
     {
-        transform.Rotate(new Vector3(0, 1, 0), -20f * Time.deltaTime);
+        transform.Rotate(new Vector3(0, 1, 0), speed * Time.deltaTime);
     }
 }

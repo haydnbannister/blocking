@@ -33,6 +33,14 @@ public class GameGrid : MonoBehaviour
         _shapeSpawner = GameObject.FindWithTag("ShapeSpawner").GetComponent<ShapeSpawner>();
     }
 
+    void Update() 
+    {
+        if (Input.GetKeyDown("p"))
+        {
+            TogglePause();
+        }
+    }
+
     public void TogglePause() {
         if (Time.timeScale == 1) 
         {

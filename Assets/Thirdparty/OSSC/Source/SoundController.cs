@@ -68,6 +68,11 @@ namespace OSSC
             var muted = IsMute(categoryName);
 
             SetMute(categoryName, !muted);
+
+            if (categoryName == "Effects") {
+                return;
+            }
+
             if (categoryName == "Music" && !muted)
             {
                 StopAll(true);

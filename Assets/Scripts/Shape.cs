@@ -30,12 +30,6 @@ public class Shape : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("p"))
-        {
-            
-        }
-
-
         if (!inPlay) return;
 
         // if game has ended since this was created

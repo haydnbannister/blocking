@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using OSSC;
 
 public class SoundControlsUI : MonoBehaviour
@@ -13,6 +14,13 @@ public class SoundControlsUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        if (SceneManager.GetActiveScene().name == "MenuScene") 
+        {
+            soundController.SetMute("Effects", false);
+            soundController.SetMute("Music", false);
+        }
+
         effectsToggle.SetIsOnWithoutNotify(!soundController.IsMute("Effects"));
         musicToggle.SetIsOnWithoutNotify(!soundController.IsMute("Music"));
         

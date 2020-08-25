@@ -30,6 +30,7 @@ public class GameGrid : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         _shapeSpawner = GameObject.FindWithTag("ShapeSpawner").GetComponent<ShapeSpawner>();
     }
 
@@ -261,7 +262,7 @@ public class GameGrid : MonoBehaviour
     public void RestartScene() 
     {
         if (Time.timeScale == 0) {
-            Time.timeScale =1;
+            Time.timeScale = 1;
         }
          SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

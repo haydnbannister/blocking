@@ -1,2 +1,5 @@
 # blocking
-Tetris style game, but in a 3D grid, with special blocks and powerups
+3D Tetris style game, with special blocks and powerups. 
+
+Runs in browser, deployed at https://hb.codes/blocking
+

@@ -90,7 +90,7 @@ MonoBehaviour:
     categoryVolume: 1
     foldOutSoundItems: 1
     soundsSearchName: 
-    isMute: 1
+    isMute: 0
   - name: Music
     soundItems:
     - name: Music

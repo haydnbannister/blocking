@@ -48,6 +48,10 @@ public class Shape : MonoBehaviour
             return;
         }
 
+        if (Time.timeScale == 0) {
+            return;
+        }
+
         if (Input.GetKeyDown("up") && IsMovementAllowed(new Vector3(0f, 0f, 1f)))
         {
             transform.Translate(Vector3.forward * 1);

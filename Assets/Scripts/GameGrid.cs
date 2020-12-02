@@ -82,11 +82,6 @@ public class GameGrid : MonoBehaviour
                     case "blaster":
                         VerticalBlasterEffect(x, y, z);
                         break;
-                    case "hammer":
-                        HammerEffect(x, z);
-                        CheckForFilledLayers();
-                        numBlocksOnGrid--;
-                        break;
                     case "3x3x3":
                         BombEffect(x, y, z, 1);
                         break;

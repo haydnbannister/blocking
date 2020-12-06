@@ -21,8 +21,8 @@ public class SoundControlsUI : MonoBehaviour
             soundController.SetMute("Music", false);
         }
 
-        effectsToggle.SetIsOnWithoutNotify(!soundController.IsMute("Effects"));
-        musicToggle.SetIsOnWithoutNotify(!soundController.IsMute("Music"));
+        effectsToggle.SetIsOnWithoutNotify(soundController.IsMute("Effects"));
+        musicToggle.SetIsOnWithoutNotify(soundController.IsMute("Music"));
         
         PlaySoundSettings settings = new PlaySoundSettings();
         settings.Init();

@@ -30,6 +30,11 @@ public class Shape : MonoBehaviour
 
     void Update()
     {
+        handleMovement("");
+    }
+
+    public void handleMovement(string direction)
+    {
         if (!inPlay) return;
 
         // if game has ended since this was created
@@ -48,51 +53,54 @@ public class Shape : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown("up") && IsMovementAllowed(cameraRig.GetDirection("up")))
+        if (Time.timeScale == 0) return;
+
+
+        if ((Input.GetKeyDown("up") || direction == "up") && IsMovementAllowed(cameraRig.GetDirection("up")))
         {
             transform.Translate(cameraRig.GetDirection("up"));
             _gameGrid.PlaySound("Click");
         }
 
-        if (Input.GetKeyDown("down") && IsMovementAllowed(cameraRig.GetDirection("down")))
+        if ((Input.GetKeyDown("down") || direction == "down") && IsMovementAllowed(cameraRig.GetDirection("down")))
         {
             transform.Translate(cameraRig.GetDirection("down"));
             _gameGrid.PlaySound("Click");
         }
 
-        if (Input.GetKeyDown("left") && IsMovementAllowed(cameraRig.GetDirection("left")))
+        if ((Input.GetKeyDown("left") || direction == "left") && IsMovementAllowed(cameraRig.GetDirection("left")))
         {
             transform.Translate(cameraRig.GetDirection("left"));
             _gameGrid.PlaySound("Click");
         }
 
-        if (Input.GetKeyDown("right") && IsMovementAllowed(cameraRig.GetDirection("right")))
+        if ((Input.GetKeyDown("right") || direction == "right") && IsMovementAllowed(cameraRig.GetDirection("right")))
         {
             transform.Translate(cameraRig.GetDirection("right"));
             _gameGrid.PlaySound("Click");
         }
 
 
-        if (Input.GetKeyDown("w"))
+        if ((Input.GetKeyDown("w") || direction == "w"))
         {
             Rotate(cameraRig.GetRotation("w"));
         }
-        if (Input.GetKeyDown("s"))
+        if ((Input.GetKeyDown("s") || direction == "s"))
         {
             Rotate(cameraRig.GetRotation("s"));
         }
-        if (Input.GetKeyDown("a"))
+        if ((Input.GetKeyDown("a") || direction == "a"))
         {
             Rotate(cameraRig.GetRotation("a"));
         }
-        if (Input.GetKeyDown("d"))
+        if ((Input.GetKeyDown("d") || direction == "d"))
         {
             Rotate(cameraRig.GetRotation("d"));
         }
 
 
         // speed downwards
-        if (Input.GetKey("space"))
+        if (Input.GetKey("space") || direction == "space")
         {
             transform.Translate(Vector3.down * (Time.deltaTime * 5f), Space.World);
         }

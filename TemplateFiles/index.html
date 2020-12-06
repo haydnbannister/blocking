@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175577801-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-175577801-1');
+    </script>
+    <script data-ad-client="ca-pub-3196744577041120" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Blocking | HBcodes</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/Blocking.json", {onProgress: UnityProgress});
+    </script>
+    <style scoped>
+      @font-face { font-family: QuickSand; src: url('TemplateData/Quicksand-Medium.ttf'); }
+      h1 {font-family: QuickSand, sans-serif;}
+      p {font-family: QuickSand, sans-serif;}
+
+      div#credit-footer {
+        display: none;
+      }
+      #full-screen {
+        display: inline;
+      }
+      .fit-for-screen {
+        width: 300px;
+        height: 500px
+      }
+      @media (min-width: 600px) and (min-height: 320px) {
+        .fit-for-screen {
+          width: 500px;
+          height: 300px
+        }
+      @media (min-width: 750px) and (min-height: 630px) {
+        div#credit-footer {
+          display: inline;
+        }
+        #full-screen {
+          display: none;
+        }
+        .fit-for-screen {
+          width: 720px;
+          height: 480px
+        }
+      @media (min-width: 810px) and (min-height: 680px) {
+          .fit-for-screen {
+            width: 792px; 
+            height: 528px
+          }
+      @media (min-width: 920px) and (min-height: 750px) {
+          .fit-for-screen {
+            width: 900px; 
+            height: 600px
+          }
+      @media (min-width: 1080px) and (min-height: 800px) {
+          .fit-for-screen {
+            width: 1056px; 
+            height: 660px
+          }
+      @media (min-width: 1180px) and (min-height: 875px) {
+          .fit-for-screen {
+            width: 1162px; 
+            height: 726px
+      }
+      @media (min-width: 1250px) and (min-height: 920px) {
+          .fit-for-screen {
+            width: 1200px; 
+            height: 750px
+          }
+      @media (min-width: 1400px) and (min-height: 1000px) {
+          .fit-for-screen {
+            width: 1320px; 
+            height: 825px
+          }
+      }
+      </style>
+      <span class="on-the-fly-behavior"></span>
+  </head>
+  <body>
+    <div style="padding: 10px">
+      <img src="blocking-logo.png" alt="Blocking" height="40px" style="position: absolute; left: 0; right: 0; margin: auto;">
+    </div>
+    <div class="webgl-content">
+      <div id="unityContainer" class="fit-for-screen"></div>
+        <div class="footer">
+          <p id="full-screen">Full Screen reccomended</p><div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+        </div>
+			<div id="loadingBox" style="display:none">
+		<img src="blocking-logo.png" alt="Blocking" width=60%>
+		<h1 id="loadingInfo" style="color:white; margin-top: 10px;">Game Loading</h1>
+				<img src="TemplateData/loading.gif" alt="Blocking" width=25%>
+	</div>
+      </div>
+	  
+
+    <div id="credit-footer" class="navbar navbar-fixed-bottom" style=" z-index: -1">
+      <div class = "pull-left">
+        <div class="container">
+          <button id="credit-button" type="button" class="btn btn-info" data-toggle="collapse" data-target="#credits">Credits</button>
+          <div id="credits" class="collapse">
+            <div style="float: left; width: 25%;">
+              Block Textures | <a href="https://www.ciathyza.com" target="_blank">Ciathyza</a><br>
+              Rocket Models | <a href="https://twitter.com/AurynSky" target="_blank">AurynSky</a><br>
+              Hammer Model | <a href="https://srjoke.artstation.com" target="_blank">BasicCore</a><br>
+              Sound Effects | <a href="http://dustyroom.com" target="_blank">Dustyroom</a><br>
+              Sound Controller | <a href="https://github.com/dimixar/audio-controller-unity" target="_blank">Dumitru Molosnic</a>
+            </div>
+            <div style="margin-left: 20%;">
+              <br>
+              Songs:<br>
+              The Other Side | <a href="https://soundcloud.com/lesionxbeats" target="_blank">Lesion X</a><br> 
+              A New Way | <a href="https://soundcloud.com/lesionxbeats" target="_blank">Lesion X</a><br>
+              A Journey Through The Universe | <a href="https://soundcloud.com/lesionxbeats" target="_blank">Lesion X</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

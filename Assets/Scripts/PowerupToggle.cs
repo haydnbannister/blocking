@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PowerupToggle : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public bool UiControls = false;
+    public bool spacePressed = false;
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }
+
+
 }

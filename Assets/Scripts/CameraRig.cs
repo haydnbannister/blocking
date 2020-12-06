@@ -63,14 +63,16 @@ public class CameraRig : MonoBehaviour
 
     void Update()
     {
-
+        HandleRotation("");
+    }
+    public void HandleRotation(string direction) {
         if (to != -1)
         {
             Vector3 targetDirection = new Vector3(0, 0, 0);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, to, 0), speed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown("q"))
+        if (Input.GetKeyDown("q") || direction == "q")
         {
             if (j == 2)
             {
@@ -91,7 +93,7 @@ public class CameraRig : MonoBehaviour
             Debug.Log(angs[i, j]);
             to = angs[i, j];
         }
-        if (Input.GetKeyDown("e"))
+        if (Input.GetKeyDown("e") || direction == "e")
         {
             Debug.Log(transform.rotation.eulerAngles);
             if (j == 0)
@@ -115,49 +117,3 @@ public class CameraRig : MonoBehaviour
         }
     }
 }
-
-// public float spinSpeed = 75f;
-// public bool spinningClockwise = false;
-// public bool spinningCounterClockwise = false;
-// public float target = 0;
-
-// public float start = 999f;
-// if (spinningClockwise) {
-//     if (transform.rotation.eulerAngles.y < target || transform.rotation.eulerAngles.y >= start) {
-//         transform.Rotate(new Vector3(0, 1, 0), 250 * Time.deltaTime);
-//     } else {spinningClockwise = false; start = 999f;}
-// } else if (spinningClockwise) {
-//     if (transform.rotation.eulerAngles.y > target || transform.rotation.eulerAngles.y <= start) {
-//         transform.Rotate(new Vector3(0, 1, 0), 250 * Time.deltaTime);
-//     } else {spinningClockwise = false; start = 999f;}
-// } else if (Input.GetKey("q"))
-// {
-//     var rotation = transform.rotation.eulerAngles.y;
-//     Debug.Log(rotation);
-//     if (rotation > 65 && rotation <  115) {
-//         target = 115;
-//         spinningClockwise = true;
-//         return;
-//     }
-//     if (rotation > 155 && rotation <  205) {
-//         target = 205;
-//         spinningClockwise = true;
-//         return;
-//     }
-//     if (rotation > 245 && rotation <  295) {
-//         target = 295;
-//         spinningClockwise = true;
-//         return;
-//     }
-//     if (rotation > 335) {
-//         target = 15;
-//         start = 335;
-//         spinningClockwise = true;
-//         return;
-//     }
-//     transform.Rotate(new Vector3(0, 1, 0), spinSpeed * Time.deltaTime);
-// }
-// if (Input.GetKey("e"))
-// {   Debug.Log(transform.rotation.eulerAngles);
-//     transform.Rotate(new Vector3(0, 1, 0), - spinSpeed * Time.deltaTime);
-// }

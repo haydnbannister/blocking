@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 using OSSC;
 
@@ -14,19 +15,22 @@ public class GameGrid : MonoBehaviour
     public GameObject blasterEffectExplosionPrefab;
     private ShapeSpawner _shapeSpawner;
     public GameObject endGameUI;
-    public GameObject newGameUI;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI pauseText;
+    public Image pauseButtonImage;
+    public Sprite[] pauseImages; //[playing,paused]
     public int score = 0;
+    public Shape currentShape;
+
+    public CameraRig cameraRig;
 
     public int numBlocksOnGrid = 0;
 
 
     private const int GameHeight = 13;
-    
+
     // add 10 as safety margin, assumption that no block is more than 10 high
     public Block[,,] blocks = new Block[7, GameHeight + 10, 7];
-    
+
 
     void Start()
     {
@@ -34,7 +38,7 @@ public class GameGrid : MonoBehaviour
         _shapeSpawner = GameObject.FindWithTag("ShapeSpawner").GetComponent<ShapeSpawner>();
     }
 
-    void Update() 
+    void Update()
     {
         if (Input.GetKeyDown("p"))
         {
@@ -42,13 +46,28 @@ public class GameGrid : MonoBehaviour
         }
     }
 
-    public void TogglePause() {
-        if (Time.timeScale == 1) 
+    public void HandleMobileControl(string direction)
+    {
+        if (currentShape != null)
         {
-            pauseText.text = "PLAY";
+            if (direction == "q" || direction == "e") {
+                cameraRig.HandleRotation(direction);
+            } else {
+                currentShape.handleMovement(direction);
+            }
+        }
+    }
+
+    public void TogglePause()
+    {
+        if (Time.timeScale == 1)
+        {
+            pauseButtonImage.sprite = pauseImages[0];
             Time.timeScale = 0;
-        } else {
-            pauseText.text = "PAUSE";
+        }
+        else
+        {
+            pauseButtonImage.sprite = pauseImages[1];
             Time.timeScale = 1;
         }
     }
@@ -68,9 +87,9 @@ public class GameGrid : MonoBehaviour
         {
             var pos = block.transform.position;
 
-            var x = (int) Math.Round(pos.x, 0);
-            var z = (int) Math.Round(pos.z, 0);
-            var y = (int) Math.Round(pos.y, 0);
+            var x = (int)Math.Round(pos.x, 0);
+            var z = (int)Math.Round(pos.z, 0);
+            var y = (int)Math.Round(pos.y, 0);
             blocks[x, y, z] = block;
             numBlocksOnGrid++;
 
@@ -78,7 +97,8 @@ public class GameGrid : MonoBehaviour
             if (expPowerUp != null)
             {
                 string type = expPowerUp.type;
-                switch (type) {
+                switch (type)
+                {
                     case "blaster":
                         VerticalBlasterEffect(x, y, z);
                         break;
@@ -105,7 +125,7 @@ public class GameGrid : MonoBehaviour
         {
             if (block != null)
             {
-                if ((int) Math.Round(block.transform.position.y, 0) > GameHeight -1)
+                if ((int)Math.Round(block.transform.position.y, 0) > GameHeight - 1)
                 {
                     HandleGameOver();
                 }
@@ -123,7 +143,7 @@ public class GameGrid : MonoBehaviour
                 blocks[xb, y, zb] = null;
                 numBlocksOnGrid--;
             }
-        }    
+        }
     }
 
     private void HammerEffect(int xb, int zb)
@@ -135,13 +155,13 @@ public class GameGrid : MonoBehaviour
             {
                 if (blocks[xb, y - 1, zb] == null)
                 {
-                    blocks[xb, y -1, zb] = blocks[xb, y, zb];
-                    blocks[xb, y, zb].transform.position = new Vector3(xb, y -1, zb);
+                    blocks[xb, y - 1, zb] = blocks[xb, y, zb];
+                    blocks[xb, y, zb].transform.position = new Vector3(xb, y - 1, zb);
                     blocks[xb, y, zb] = null;
                     changes++;
                 }
             }
-        } 
+        }
         // recurse to cascade through bigger gaps
         if (changes > 0) HammerEffect(xb, zb);
     }
@@ -154,27 +174,27 @@ public class GameGrid : MonoBehaviour
             {
                 for (var z = zb - size; z <= zb + size; z++)
                 {
-                    if (x >= 0 && y >= 0 && z >= 0 && x <= 6 && y < GameHeight && z <= 6) 
+                    if (x >= 0 && y >= 0 && z >= 0 && x <= 6 && y < GameHeight && z <= 6)
                     {
                         if (blocks[x, y, z] != null)
                         {
-                                Destroy(blocks[x, y, z].gameObject);
-                                blocks[x, y, z] = null;
-                                numBlocksOnGrid--;
+                            Destroy(blocks[x, y, z].gameObject);
+                            blocks[x, y, z] = null;
+                            numBlocksOnGrid--;
                         }
                     }
                 }
             }
-        }    
+        }
     }
 
     public bool IsSpaceOccupied(Vector3 space)
     {
-        var x = (int) space.x;
-        var z = (int) space.z;
+        var x = (int)space.x;
+        var z = (int)space.z;
 
-        var yUp = (int) Math.Ceiling(space.y);
-        var yDown = (int) Math.Floor(space.y);
+        var yUp = (int)Math.Ceiling(space.y);
+        var yDown = (int)Math.Floor(space.y);
 
         if (yUp > GameHeight - 1 || yDown > GameHeight - 1)
         {
@@ -205,7 +225,7 @@ public class GameGrid : MonoBehaviour
                 y--;
                 numBlocksOnGrid = numBlocksOnGrid - 49;
                 score++;
-                scoreText.text = score.ToString();
+                scoreText.text = "SCORE:" + score.ToString();
             }
         }
     }
@@ -235,7 +255,7 @@ public class GameGrid : MonoBehaviour
         }
     }
 
-    public void HandleGameOver() 
+    public void HandleGameOver()
     {
         foreach (var block in blocks)
         {
@@ -246,19 +266,24 @@ public class GameGrid : MonoBehaviour
                 block.gameObject.GetComponent<Rigidbody>().useGravity = true;
             }
         }
-        if (!_shapeSpawner.gameOver) {
+        if (!_shapeSpawner.gameOver)
+        {
             _shapeSpawner.EndGame();
             PlaySound("GameOver");
         }
-        _shapeSpawner.powerupToggle.gameObject.SetActive(true);        
+        if (_shapeSpawner.powerupToggle != null)
+        {
+            _shapeSpawner.powerupToggle.gameObject.SetActive(true);
+        }
         endGameUI.SetActive(false);
     }
 
-    public void RestartScene() 
+    public void RestartScene()
     {
-        if (Time.timeScale == 0) {
+        if (Time.timeScale == 0)
+        {
             Time.timeScale = 1;
         }
-         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

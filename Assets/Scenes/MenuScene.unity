@@ -267,6 +267,7 @@ MonoBehaviour:
   desktopControlInstructions: {fileID: 1467555537}
   mobileControls: {fileID: 0}
   powerupToggle: {fileID: 0}
+  mobileSpaceText: {fileID: 0}
 --- !u!4 &347484634
 Transform:
   m_ObjectHideFlags: 0

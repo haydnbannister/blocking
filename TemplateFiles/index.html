@@ -37,14 +37,22 @@
       #full-screen {
         display: inline;
       }
+	  #loadingInfo{
+		font-size:20px;
+	  }
       .fit-for-screen {
         width: 300px;
         height: 500px
       }
-      @media (min-width: 600px) and (min-height: 320px) {
+      @media (min-width: 550px) and (min-height: 280px) {
         .fit-for-screen {
           width: 500px;
-          height: 300px
+          height: 260px
+        }
+		@media (min-width: 650px) and (min-height: 450px) {
+        .fit-for-screen {
+          width: 600px;
+          height: 400px
         }
       @media (min-width: 750px) and (min-height: 630px) {
         div#credit-footer {
@@ -58,6 +66,9 @@
           height: 480px
         }
       @media (min-width: 810px) and (min-height: 680px) {
+	  	  #loadingInfo{
+		    font-size:25px;
+	      }
           .fit-for-screen {
             width: 792px; 
             height: 528px
@@ -73,6 +84,9 @@
             height: 660px
           }
       @media (min-width: 1180px) and (min-height: 875px) {
+	  	  #loadingInfo{
+		    font-size:30px;
+		  }
           .fit-for-screen {
             width: 1162px; 
             height: 726px
@@ -83,6 +97,9 @@
             height: 750px
           }
       @media (min-width: 1400px) and (min-height: 1000px) {
+	  	  #loadingInfo{
+			font-size:35px;
+		  }
           .fit-for-screen {
             width: 1320px; 
             height: 825px
@@ -113,6 +130,7 @@
         <div class="container">
           <button id="credit-button" type="button" class="btn btn-info" data-toggle="collapse" data-target="#credits">Credits</button>
           <div id="credits" class="collapse">
+		  <h4>Game Created by <a href="https://hb.codes?blocking" target="_blank">Haydn Bannister</a></h3>
             <div style="float: left; width: 25%;">
               Block Textures | <a href="https://www.ciathyza.com" target="_blank">Ciathyza</a><br>
               Rocket Models | <a href="https://twitter.com/AurynSky" target="_blank">AurynSky</a><br>

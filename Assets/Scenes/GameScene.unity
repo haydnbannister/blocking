@@ -359,7 +359,7 @@ PrefabInstance:
     - target: {fileID: 7368605017899625239, guid: 812e10695236ad04a8852f330da6f835,
         type: 3}
       propertyPath: m_Colors.m_PressedColor.a
-      value: 0.015686275
+      value: 0.023529412
       objectReference: {fileID: 0}
     - target: {fileID: 7368605017899625239, guid: 812e10695236ad04a8852f330da6f835,
         type: 3}
@@ -2170,6 +2170,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ff92493dcec02da4e956430a8d4da1cb, type: 3}
   score: 0
   currentShape: {fileID: 0}
+  mobileController: {fileID: 347484633}
   cameraRig: {fileID: 705977695}
   numBlocksOnGrid: 0
 --- !u!4 &1025726497
@@ -3512,7 +3513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1584469707
 MonoBehaviour:
   m_ObjectHideFlags: 0

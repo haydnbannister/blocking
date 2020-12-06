@@ -21,6 +21,8 @@ public class GameGrid : MonoBehaviour
     public int score = 0;
     public Shape currentShape;
 
+    public MobileController mobileController;
+
     public CameraRig cameraRig;
 
     public int numBlocksOnGrid = 0;
@@ -50,9 +52,12 @@ public class GameGrid : MonoBehaviour
     {
         if (currentShape != null)
         {
-            if (direction == "q" || direction == "e") {
+            if (direction == "q" || direction == "e")
+            {
                 cameraRig.HandleRotation(direction);
-            } else {
+            }
+            else
+            {
                 currentShape.handleMovement(direction);
             }
         }
@@ -273,7 +278,10 @@ public class GameGrid : MonoBehaviour
         }
         if (_shapeSpawner.powerupToggle != null)
         {
-            _shapeSpawner.powerupToggle.gameObject.SetActive(true);
+            if (!mobileController.isMobile() && !mobileController.powerupToggle.UiControls)
+            {
+                _shapeSpawner.powerupToggle.gameObject.SetActive(true);
+            }
         }
         endGameUI.SetActive(false);
     }

@@ -27,7 +27,9 @@ public class MobileController : MonoBehaviour
             if (mobileControls != null) mobileControls.SetActive(true);
 
             if(mobileSpaceText != null) mobileSpaceText.SetActive(!powerupToggle.spacePressed);
-        }
+        } else {
+	        mobileControls.SetActive(false);
+	    }
     }
 
     public void ToggleUiControls(bool mode) {
